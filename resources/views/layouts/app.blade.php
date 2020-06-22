@@ -55,6 +55,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    {{-- Logout --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -64,6 +65,21 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    {{-- end Logout --}}
+
+                                    @if (Auth::user()->isRole("Administrator"))
+                                    {{-- Admin --}}
+                                        <a class="dropdown-item" href="{{ route('admin') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('admin-form').submit();">
+                                            {{ __('Admin') }}
+                                        </a>
+
+                                        <form id="admin-form" action="{{ route('admin') }}" method="GET" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    {{-- end Admin --}}
+                                    @endif
                                 </div>
                             </li>
                         @endguest
